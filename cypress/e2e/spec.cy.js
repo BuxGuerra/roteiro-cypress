@@ -68,4 +68,93 @@ describe('TODOMvc App', () => {
       .children()
       .should('have.length', 2);
   });
+
+  it('Deleta tarefas completas', () => {
+    cy.visit(''); 
+
+    cy.get('[data-cy=todo-input]')
+      .type('TP2 de ES{enter}')
+      .type('Prova de ES{enter}');
+
+    cy.get('[data-cy=todos-list] > li [data-cy=toggle-todo-checkbox]')
+      .first()
+      .click();
+
+    cy.get('[data-cy=filter-active-link')
+      .click();
+
+    cy.get('[data-cy=todos-list] > li [data-cy=toggle-todo-checkbox]')
+      .first()
+      .click();
+
+    cy.get('[data-cy=filter-completed-link')
+      .click();
+    cy.get('[data-cy=todos-list]')
+      .children()
+      .should('have.length', 2)
+
+    cy.get('[class=clear-completed')
+      .click();
+
+    cy.get('[data-cy=todos-list]')
+      .children()
+      .should('have.length', 0)
+  });
+
+  it('Deleta uma tarefa completa', () => {
+    cy.visit(''); 
+
+    cy.get('[data-cy=todo-input]')
+      .type('TP2 de ES{enter}')
+      .type('Prova de ES{enter}');
+
+    cy.get('[data-cy=todos-list] > li [data-cy=toggle-todo-checkbox]')
+      .first()
+      .click();
+
+    cy.get('[data-cy=filter-active-link')
+      .click();
+
+    cy.get('[data-cy=todos-list] > li [data-cy=toggle-todo-checkbox]')
+      .first()
+      .click();
+
+    cy.get('[data-cy=filter-completed-link')
+      .click();
+    cy.get('[data-cy=todos-list]')
+      .children()
+      .should('have.length', 2)
+
+    cy.get('[data-cy=todos-list] > li [data-cy=remove-todo-btn]')
+      .invoke('show')
+      .first()
+      .click();
+
+    cy.get('[data-cy=todos-list]')
+      .children()
+      .should('have.length', 1)
+  });
+
+  it('Confere filtro all', () => {
+    cy.visit(''); 
+
+    cy.get('[data-cy=todo-input]')
+      .type('TP2 de ES{enter}')
+      .type('Prova de ES{enter}');
+
+    cy.get('[data-cy=todos-list]')
+      .children()
+      .should('have.length', 2)
+
+    cy.get('[data-cy=todos-list] > li [data-cy=toggle-todo-checkbox]')
+      .first()
+      .click();
+
+    cy.get('[data-cy=filter-all-link')
+      .click();
+
+    cy.get('[data-cy=todos-list]')
+      .children()
+      .should('have.length', 2)
+  });
 });
